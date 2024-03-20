@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class Cluedo {
     public static void main(String[] args) {
 
+        boolean pregunta = true;
+        String preguntaContinuada;
+
         Scanner scn = new Scanner(System.in);
 
         String personajes[] = { "Amapola", "Celeste", "Prado", "Mora", "Rubio", "Blanco" };
@@ -23,40 +26,84 @@ public class Cluedo {
 
         int respuesta = scn.nextInt();
 
-        switch (respuesta) {
-            case 1:
-                System.out.println("¿Cuantos personajes quieres añadir?");
+        while (pregunta) {
 
-                int numero = scn.nextInt();
+            switch (respuesta) {
 
-                actualizarArray(personajes, numero);
+                case 1:
 
-                break;
+                    System.out.println("¿Cuantos personajes quieres añadir?");
 
-            case 2:
-                System.out.println("¿Que arma quieres añadir?");
-                int numeroArmas = scn.nextInt();
+                    int numero = scn.nextInt();
 
-                actualizarArray(personajes, numeroArmas);
+                    System.out.println("Introduce los nombres de los personajes: ");
 
-                break;
+                    actualizarArray(personajes, numero);
 
-            case 3:
+                    System.out.println("¿Quieres añadir mas personajes?");
 
-                System.out.println("¿Cual es el lugar o habitacion que quieres añadir?");
+                    preguntaContinuada = scn.next();
 
-                int numeroHB = scn.nextInt();
+                    if (preguntaContinuada.equalsIgnoreCase("Si")) {
 
-                actualizarArray(lugares_Habitaciones, numeroHB);
+                    } else
+                        pregunta = false;
 
-                break;
+                    break;
 
-            case 4:
-                System.out.println("Hasta luego ;)");
-                break;
+                case 2:
 
-            default:
-                break;
+                    System.out.println("¿Cuantas armas quieres añadir?");
+
+                    int numeroArmas = scn.nextInt();
+
+                    System.out.println("Introduce los nombres de las armas a añadir: ");
+
+                    actualizarArray(armasPersonajes, numeroArmas);
+
+                    System.out.println("¿Quieres añadir mas armas?");
+
+                    preguntaContinuada = scn.next();
+
+                    if (preguntaContinuada.equalsIgnoreCase("Si")) {
+
+                    } else
+                        pregunta = false;
+
+                    break;
+
+                case 3:
+
+                    System.out.println("Cuantas habitaciones quieres añadir?");
+
+                    int numeroHB = scn.nextInt();
+
+                    System.out.println("Introduce los nombres de las habitaciones: ");
+
+                    actualizarArray(lugares_Habitaciones, numeroHB);
+
+                    System.out.println("¿Quieres añadir mas personajes?");
+
+                    preguntaContinuada = scn.next();
+
+                    if (preguntaContinuada.equalsIgnoreCase("Si")) {
+
+                    } else
+                        pregunta = false;
+
+                    break;
+
+                case 4:
+
+                    System.out.println("Hasta luego ;)");
+                    pregunta = false;
+
+                    break;
+
+                default:
+                    break;
+            }
+
         }
 
         scn.close();
@@ -109,16 +156,16 @@ public class Cluedo {
 
         String[] arrayNuevo = new String[arrayAntiguo.length + num];
 
-        System.out.println("Escribe lo que quieres añadir: ");
-        // intento de añadir los objetos al array:
-
-        String añadido = scn.nextLine();
-
         System.arraycopy(arrayAntiguo, 0, arrayNuevo, 0, arrayAntiguo.length);
 
-        System.out.println("Nuevo array: " + Arrays.toString(arrayNuevo));
+        for (int i = arrayAntiguo.length; i < arrayAntiguo.length + num; i++) {
 
-        scn.close();
+            String nombreNuevo = scn.nextLine();
+
+            arrayNuevo[i] = nombreNuevo;
+        }
+
+        System.out.println("Nuevo array: " + Arrays.toString(arrayNuevo));
 
         return arrayNuevo;
 
