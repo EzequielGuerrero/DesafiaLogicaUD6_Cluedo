@@ -1,10 +1,14 @@
 package retoUd6;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Cluedo {
+
     public static void main(String[] args) {
 
         boolean pregunta = true;
@@ -49,6 +53,8 @@ public class Cluedo {
                     } else
                         pregunta = false;
 
+                    System.out.println("¡Genial, sigamos…!");
+
                     break;
 
                 case 2:
@@ -69,6 +75,8 @@ public class Cluedo {
 
                     } else
                         pregunta = false;
+
+                    System.out.println("¡Genial, sigamos…!");
 
                     break;
 
@@ -91,6 +99,8 @@ public class Cluedo {
                     } else
                         pregunta = false;
 
+                    System.out.println("¡Genial, sigamos…!");
+
                     break;
 
                 case 4:
@@ -107,6 +117,10 @@ public class Cluedo {
         }
 
         scn.close();
+
+        generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
+        generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
+        generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
 
     }
 
@@ -168,6 +182,24 @@ public class Cluedo {
         System.out.println("Nuevo array: " + Arrays.toString(arrayNuevo));
 
         return arrayNuevo;
+
+    }
+
+    public static void generadorDeCartas(String[] personajes, String[] armas, String[] habitaciones) {
+
+        ArrayList<Jugador> arrayJugadores = new ArrayList<>();
+
+        int numeroAleatorioPer = (int) (Math.random() * personajes.length);
+        int numeroAleatorioArmas = (int) (Math.random() * armas.length);
+        int numeroAleatorioLugares = (int) (Math.random() * habitaciones.length);
+
+        String personjeAleatorio = personajes[numeroAleatorioPer];
+        String armaAleatorio = armas[numeroAleatorioArmas];
+        String lugaresAlt = habitaciones[numeroAleatorioLugares];
+
+        arrayJugadores.add(new Jugador(personjeAleatorio, armaAleatorio, lugaresAlt, new Date()));
+
+        System.out.println(arrayJugadores.toString());
 
     }
 }

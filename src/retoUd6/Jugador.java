@@ -11,7 +11,7 @@ public class Jugador {
 
     public Jugador(String n, String a, String h, Date hora) {
 
-        this.nombreJugador = a;
+        this.nombreJugador = n;
         this.armaJugador = a;
         this.habitacion = h;
         this.hora_de_la_partida = new Date();
@@ -48,6 +48,11 @@ public class Jugador {
 
     public void setHora_de_la_partida(Date hora_de_la_partida) {
         this.hora_de_la_partida = hora_de_la_partida;
+    }
+
+    public String toString() {
+        return "Jugador = " + nombreJugador + ", arma del jugador= " + armaJugador + ", habitacion= " + habitacion
+                + ", hora de la_partida= " + hora_de_la_partida + ".";
     }
 
 }
