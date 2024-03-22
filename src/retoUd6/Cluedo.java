@@ -1,13 +1,13 @@
 package retoUd6;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Cluedo {
+
+    public static ArrayList<Jugador> arrayJugadores = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -116,11 +116,26 @@ public class Cluedo {
 
         }
 
-        scn.close();
+        System.out.println("...Baranjando cartas...");
 
         generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
-        generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
-        generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
+
+        System.out
+                .println("Si introduces la clave correcta, puedo mostrarte quien ha sido el culpable, donde y como...");
+
+        String clave = scn.next();
+
+        if (clave.equalsIgnoreCase("Hola")) {
+
+            System.out.println("Cartas ganadoras!!");
+
+            System.out.println(
+                    "El culpable ha sido: " + arrayJugadores.toString());
+
+        } else
+            System.out.println("Clave incorrecta...");
+
+        scn.close();
 
     }
 
@@ -181,25 +196,36 @@ public class Cluedo {
 
         System.out.println("Nuevo array: " + Arrays.toString(arrayNuevo));
 
+        scn.close();
+
         return arrayNuevo;
 
     }
 
-    public static void generadorDeCartas(String[] personajes, String[] armas, String[] habitaciones) {
+    public static String generadorDeCartas(String[] personajes, String[] armas, String[] habitaciones) {
 
-        ArrayList<Jugador> arrayJugadores = new ArrayList<>();
+        try {
 
-        int numeroAleatorioPer = (int) (Math.random() * personajes.length);
-        int numeroAleatorioArmas = (int) (Math.random() * armas.length);
-        int numeroAleatorioLugares = (int) (Math.random() * habitaciones.length);
+            int numeroAleatorioPer = (int) (Math.random() * personajes.length);
+            int numeroAleatorioAr = (int) (Math.random() * personajes.length);
+            int numeroAleatorioLug = (int) (Math.random() * personajes.length);
 
-        String personjeAleatorio = personajes[numeroAleatorioPer];
-        String armaAleatorio = armas[numeroAleatorioArmas];
-        String lugaresAlt = habitaciones[numeroAleatorioLugares];
+            System.out.println(numeroAleatorioPer + "\n" + numeroAleatorioAr + "\n" + numeroAleatorioLug);
 
-        arrayJugadores.add(new Jugador(personjeAleatorio, armaAleatorio, lugaresAlt, new Date()));
+            String personjeAleatorio = personajes[numeroAleatorioPer];
+            String armaAleatorio = armas[numeroAleatorioAr];
+            String lugaresAlt = habitaciones[numeroAleatorioLug];
 
-        System.out.println(arrayJugadores.toString());
+            arrayJugadores.add(new Jugador(personjeAleatorio, armaAleatorio, lugaresAlt, new Date()));
+
+            System.out.println("Barajado de cartas realizado con exito!!");
+
+        } catch (Exception e) {
+
+            System.out.println("No se han podido generar las cartas...");
+
+        }
+        return arrayJugadores.toString();
 
     }
 }

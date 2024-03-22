@@ -52,7 +52,7 @@ public class Jugador {
 
     public String toString() {
         return "Jugador = " + nombreJugador + ", arma del jugador= " + armaJugador + ", habitacion= " + habitacion
-                + ", hora de la_partida= " + hora_de_la_partida + ".";
+                + ", hora de la_partida= " + hora_de_la_partida + "\n";
     }
 
 }
