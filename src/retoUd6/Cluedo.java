@@ -1,5 +1,9 @@
 package retoUd6;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -20,130 +24,6 @@ public class Cluedo {
         String lugares_Habitaciones[] = { "Casa de invitados", "Teatro", "Spa", "Observatorio", "Comedor", "Terraza",
                 "Salon", "Cocina", "Vestibulo" };
 
-        menuJuego(personajes, armasPersonajes, lugares_Habitaciones);
-
-        menuOpciones(personajes, armasPersonajes, lugares_Habitaciones);
-
-        System.out.println("...Baranjando cartas...");
-
-        generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
-
-        System.out
-                .println("Si introduces la clave correcta, puedo mostrarte quien ha sido el culpable, donde y como...");
-
-        String clave = scn.next();
-
-        if (clave.equalsIgnoreCase("Hola")) {
-
-            System.out.println("Cartas ganadoras!!");
-
-            System.out.println(
-                    "El culpable ha sido: " + arrayJugadores.toString());
-
-        } else
-            System.out.println("Clave incorrecta...");
-
-    }
-
-    private static void menuOpciones(String[] personajes, String[] armasPersonajes,
-            String[] lugares_Habitaciones) {
-
-        boolean pregunta = true;
-
-        int respuesta = scn.nextInt();
-
-        String preguntaContinuada;
-
-        while (pregunta) {
-
-            switch (respuesta) {
-
-                case 1:
-
-                    System.out.println("¿Cuantos personajes quieres añadir?");
-
-                    int numero = scn.nextInt();
-
-                    System.out.println("Introduce los nombres de los personajes: ");
-
-                    actualizarArray(personajes, numero);
-
-                    System.out.println("¿Quieres añadir mas personajes?");
-
-                    preguntaContinuada = scn.next();
-
-                    if (preguntaContinuada.equalsIgnoreCase("Si")) {
-
-                        pregunta = true;
-
-                    } else
-                        pregunta = false;
-
-                    System.out.println("¡Genial, sigamos…!");
-
-                    break;
-
-                case 2:
-
-                    System.out.println("¿Cuantas armas quieres añadir?");
-
-                    int numeroArmas = scn.nextInt();
-
-                    System.out.println("Introduce los nombres de las armas a añadir: ");
-
-                    actualizarArray(armasPersonajes, numeroArmas);
-
-                    System.out.println("¿Quieres añadir mas armas?");
-
-                    preguntaContinuada = scn.next();
-
-                    if (preguntaContinuada.equalsIgnoreCase("Si")) {
-
-                    } else
-                        pregunta = false;
-
-                    System.out.println("¡Genial, sigamos…!");
-
-                    break;
-
-                case 3:
-
-                    System.out.println("Cuantas habitaciones quieres añadir?");
-
-                    int numeroHB = scn.nextInt();
-
-                    System.out.println("Introduce los nombres de las habitaciones: ");
-
-                    actualizarArray(lugares_Habitaciones, numeroHB);
-
-                    System.out.println("¿Quieres añadir mas habitaciones?");
-
-                    preguntaContinuada = scn.next();
-
-                    if (preguntaContinuada.equalsIgnoreCase("Si")) {
-
-                    } else
-                        pregunta = false;
-
-                    System.out.println("¡Genial, sigamos…!");
-
-                    break;
-
-                case 4:
-
-                    System.out.println("Hasta luego ;)");
-                    pregunta = false;
-
-                    break;
-
-                default:
-                    break;
-            }
-
-        }
-    }
-
-    public static void menuJuego(String[] personajes, String[] armasPersonajes, String[] lugares_Habitaciones) {
         System.out.println("Bienvenido al Cluedo, este programa se encargara de barajar las cartas por ti. Juguemos:");
 
         System.out.println("----------------------");
@@ -162,12 +42,174 @@ public class Cluedo {
 
         lectorArrays(lugares_Habitaciones);
 
-        System.out.println("¿Quieres añadir algo mas?");
-        System.out.println("1. Personaje");
-        System.out.println("2. Arma");
-        System.out.println("3. Habitacion");
-        System.out.println("4. Salir");
+        boolean pregunta = true;
+
+        while (pregunta) {
+
+            System.out.println("¿Quieres añadir algo mas?");
+            System.out.println("1. Personaje");
+            System.out.println("2. Arma");
+            System.out.println("3. Habitacion");
+            System.out.println("4. Salir");
+
+            int respuesta = scn.nextInt();
+
+            String preguntaContinuada = "";
+
+            if (respuesta >= 1 && respuesta <= 4) {
+
+                switch (respuesta) {
+
+                    case 1:
+
+                        System.out.println("¿Cuantos personajes quieres añadir?");
+
+                        int numero = scn.nextInt();
+
+                        System.out.println("Introduce los nombres de los personajes: ");
+
+                        actualizarArray(personajes, numero);
+
+                        System.out.println("¿Quieres añadir algo mas?");
+
+                        preguntaContinuada = scn.next();
+
+                        if (preguntaContinuada.equalsIgnoreCase("Si")) {
+
+                        } else {
+
+                            System.out.println("¡Genial, sigamos…!" + "\n");
+                        }
+
+                        break;
+
+                    case 2:
+
+                        System.out.println("¿Cuantas armas quieres añadir?");
+
+                        int numeroArmas = scn.nextInt();
+
+                        System.out.println("Introduce los nombres de las armas a añadir: ");
+
+                        actualizarArray(armasPersonajes, numeroArmas);
+
+                        System.out.println("¿Quieres añadir algo mas?");
+
+                        preguntaContinuada = scn.next();
+
+                        if (preguntaContinuada.equalsIgnoreCase("Si")) {
+
+                        } else {
+
+                            System.out.println("¡Genial, sigamos…!" + "\n");
+                        }
+
+                        break;
+
+                    case 3:
+
+                        System.out.println("Cuantas habitaciones quieres añadir?");
+
+                        int numeroHB = scn.nextInt();
+
+                        System.out.println("Introduce los nombres de las habitaciones: ");
+
+                        actualizarArray(lugares_Habitaciones, numeroHB);
+
+                        System.out.println("¿Quieres añadir algo mas?");
+
+                        preguntaContinuada = scn.next();
+
+                        if (preguntaContinuada.equalsIgnoreCase("Si")) {
+
+                        } else {
+
+                            System.out.println("¡Genial, sigamos…!" + "\n");
+                        }
+                        break;
+
+                    case 4:
+
+                        System.out.println("Hasta luego ;)" + "\n");
+
+                        pregunta = false;
+
+                        break;
+
+                }
+
+                if (preguntaContinuada != null && preguntaContinuada.equalsIgnoreCase("No")) {
+                    pregunta = false;
+                } else {
+                    System.out.println("¡Genial, sigamos…!" + "\n");
+                }
+
+            } else {
+                System.out.println("Numero incorrecto, introduce un numero valido dentro de las opciones del menu.");
+
+                pregunta = true;
+            }
+
+        }
+
+        System.out.println("...Baranjando cartas..." + "\n");
+
+        // Metodo que genera el culpable del juego gracias a su lógica aleatoria.
+
+        generadorDeCartas(personajes, armasPersonajes, lugares_Habitaciones);
+
+        // Metodo que pregunta la contraseña y si es la correcta muestra al culpable.
+
+        preguntaContraseña();
+
+        // Imprime el archivo -txt con los culpables que se han ido generando a cada
+        // vuelta.
+
+        imprimirArchivo();
+
     }
+
+    // Metodo que utilizo para imprimir el archivo con la informacion dentro del
+    // ArrayList.
+
+    private static void imprimirArchivo() {
+
+        String rutaArchivos = System.getProperty("user.dir");
+
+        try {
+
+            BufferedWriter miBuffer = new BufferedWriter(
+                    new FileWriter(rutaArchivos + File.separator + "RegistroCulpables.txt", true));
+
+            miBuffer.write(arrayJugadores.toString());
+
+            miBuffer.close();
+
+            System.out.println("Datos guardados!!" + "\n" + "Hasta la vista!!");
+
+        } catch (IOException e) {
+            System.out.println("No se han podido guardar los jugadores");
+
+        }
+
+    }
+
+    // Metodo que compara si el valor del String introducido por el usuario equivale
+    // al guardado.
+
+    private static void preguntaContraseña() {
+        System.out.println("Si introduces la clave correcta, puedo enseñarte quien ha sido el culpable...");
+
+        String clave = scn.next();
+
+        if (clave.equalsIgnoreCase("hola")) {
+
+            System.out.println("Clave correcta,el culpable ha sido" + arrayJugadores.toString());
+        } else
+            System.out.println("Clave incorrecta");
+    }
+
+    // Metodo que utiliza un for-each para leer los arrays.
 
     public static void lectorArrays(String[] e) {
 
@@ -179,23 +221,23 @@ public class Cluedo {
 
     }
 
+    // Actualiza el array existente por uno nuevo
+
     public static String[] actualizarArray(String[] arrayAntiguo, int num) {
 
         String[] arrayNuevo = new String[arrayAntiguo.length + num];
 
+        System.arraycopy(arrayAntiguo, 0, arrayNuevo, 0, arrayAntiguo.length);
+
         for (int i = arrayAntiguo.length; i < arrayAntiguo.length + num; i++) {
 
             String nombreNuevo = scn.next();
-
             arrayNuevo[i] = nombreNuevo;
         }
-
-        System.arraycopy(arrayAntiguo, 0, arrayNuevo, 0, arrayAntiguo.length);
 
         System.out.println("Nuevo array: " + Arrays.toString(arrayNuevo));
 
         return arrayNuevo;
-
     }
 
     public static String generadorDeCartas(String[] personajes, String[] armas, String[] habitaciones) {
@@ -206,7 +248,7 @@ public class Cluedo {
             int numeroAleatorioAr = (int) (Math.random() * armas.length);
             int numeroAleatorioLug = (int) (Math.random() * habitaciones.length);
 
-            System.out.println(numeroAleatorioPer + "\n" + numeroAleatorioAr + "\n" + numeroAleatorioLug);
+            System.out.println(numeroAleatorioPer + "\n" + numeroAleatorioAr + "\n" + numeroAleatorioLug + "\n");
 
             String personjeAleatorio = personajes[numeroAleatorioPer];
             String armaAleatorio = armas[numeroAleatorioAr];
@@ -224,4 +266,5 @@ public class Cluedo {
         return arrayJugadores.toString();
 
     }
+
 }

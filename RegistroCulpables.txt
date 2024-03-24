@@ -1,0 +1,6 @@
+[Jugador = Mora, arma del jugador= Cuchillo, habitacion= Cocina, hora de la_partida= Sun Mar 24 12:43:29 CET 2024
+][Jugador = Amapola, arma del jugador= Trofeo, habitacion= Terraza, hora de la_partida= Sun Mar 24 12:44:05 CET 2024
+][Jugador = Rubio, arma del jugador= Cuerda, habitacion= Casa de invitados, hora de la_partida= Sun Mar 24 12:44:10 CET 2024
+][Jugador = Prado, arma del jugador= Bate, habitacion= Spa, hora de la_partida= Sun Mar 24 12:48:08 CET 2024
+][Jugador = Amapola, arma del jugador= hacha, habitacion= Vestibulo, hora de la_partida= Sun Mar 24 12:58:20 CET 2024
+]
